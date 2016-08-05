@@ -16,6 +16,7 @@
 		9DF762061D5035AF0080F562 /* AXSPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF762051D5035AF0080F562 /* AXSPageViewController.swift */; };
 		9DF7620A1D5063130080F562 /* Swipe3ClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF762091D5063130080F562 /* Swipe3ClassViewController.swift */; };
 		9DF7620C1D5065220080F562 /* InformationClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF7620B1D5065220080F562 /* InformationClassViewController.swift */; };
+		9DF7620E1D5440090080F562 /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF7620D1D5440090080F562 /* BarCodeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		9DF762051D5035AF0080F562 /* AXSPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXSPageViewController.swift; sourceTree = "<group>"; };
 		9DF762091D5063130080F562 /* Swipe3ClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swipe3ClassViewController.swift; sourceTree = "<group>"; };
 		9DF7620B1D5065220080F562 /* InformationClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationClassViewController.swift; sourceTree = "<group>"; };
+		9DF7620D1D5440090080F562 /* BarCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCodeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				9DF761CD1D50339F0080F562 /* AppDelegate.swift */,
 				9DF761D51D50339F0080F562 /* Main.storyboard */,
+				9DF7620D1D5440090080F562 /* BarCodeViewController.swift */,
 				9DF762051D5035AF0080F562 /* AXSPageViewController.swift */,
 				9DF762091D5063130080F562 /* Swipe3ClassViewController.swift */,
 				9DF7620B1D5065220080F562 /* InformationClassViewController.swift */,
@@ -266,6 +269,7 @@
 				9DF7620A1D5063130080F562 /* Swipe3ClassViewController.swift in Sources */,
 				9DF7620C1D5065220080F562 /* InformationClassViewController.swift in Sources */,
 				9DF761CE1D50339F0080F562 /* AppDelegate.swift in Sources */,
+				9DF7620E1D5440090080F562 /* BarCodeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

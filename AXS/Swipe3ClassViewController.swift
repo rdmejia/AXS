@@ -22,9 +22,13 @@ class Swipe3ClassViewController: UIViewController {
     }
     
     @IBAction func btnDoneTapped(sender: UIButton) {
-        let scndView:InformationClassViewController = InformationClassViewController(nibName: nil, bundle: nil)
+        //let scndView:InformationClassViewController = InformationClassViewController(nibName: nil, bundle: nil)
         
-         self.presentViewController(scndView, animated: true, completion: nil)
+        //self.presentViewController(scndView, animated: true, completion: nil)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("InformationViewController") //as! UIViewController
+        self.presentViewController(vc, animated: true, completion: nil)
     }
 
     /*
