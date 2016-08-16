@@ -269,26 +269,105 @@
                                     <action selector="btnFlashTapped:" destination="nRp-rD-KkR" eventType="touchUpInside" id="MY0-tQ-E9p"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heG-8O-Dq7">
+                                <rect key="frame" x="277" y="266" width="46" height="30"/>
+                                <state key="normal" title="button">
+                                    <color key="titleShadowColor" red="0.30675092500000001" green="1" blue="0.35096619029999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnTapped:" destination="nRp-rD-KkR" eventType="touchUpInside" id="3jb-jX-ePc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.42549111229999997" blue="0.099679167880000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6PS-6L-yqR" firstAttribute="top" secondItem="Ghm-K3-DE4" secondAttribute="bottom" constant="19" id="3on-bg-BOn"/>
+                            <constraint firstItem="heG-8O-Dq7" firstAttribute="top" secondItem="FvJ-kQ-PGG" secondAttribute="top" constant="266" id="4Ji-8V-YtT"/>
                             <constraint firstItem="OnK-Yp-rKa" firstAttribute="leading" secondItem="Ghm-K3-DE4" secondAttribute="trailing" constant="33" id="FK1-XZ-xW5"/>
                             <constraint firstItem="DOj-a7-ZF0" firstAttribute="top" secondItem="aUx-Cg-toF" secondAttribute="bottom" id="Gr7-xP-TiK"/>
                             <constraint firstItem="6PS-6L-yqR" firstAttribute="top" secondItem="OnK-Yp-rKa" secondAttribute="bottom" constant="29" id="QIw-ND-8Yn"/>
                             <constraint firstItem="DOj-a7-ZF0" firstAttribute="centerX" secondItem="FvJ-kQ-PGG" secondAttribute="centerX" id="Ts4-yg-ECO"/>
                             <constraint firstItem="Ghm-K3-DE4" firstAttribute="centerX" secondItem="DOj-a7-ZF0" secondAttribute="centerX" id="VZH-Wk-If9"/>
                             <constraint firstItem="6PS-6L-yqR" firstAttribute="top" secondItem="Hec-sk-r2t" secondAttribute="bottom" constant="34" id="g62-Ee-Wa4"/>
+                            <constraint firstItem="heG-8O-Dq7" firstAttribute="centerX" secondItem="DOj-a7-ZF0" secondAttribute="centerX" id="jeM-UC-nHg"/>
                             <constraint firstItem="Ghm-K3-DE4" firstAttribute="leading" secondItem="Hec-sk-r2t" secondAttribute="trailing" constant="33" id="nXT-Cb-7RU"/>
                             <constraint firstItem="Hec-sk-r2t" firstAttribute="centerY" secondItem="Ghm-K3-DE4" secondAttribute="centerY" id="ows-g2-w7B"/>
                             <constraint firstItem="Ghm-K3-DE4" firstAttribute="centerY" secondItem="OnK-Yp-rKa" secondAttribute="centerY" id="pJx-6d-6eR"/>
                             <constraint firstItem="6PS-6L-yqR" firstAttribute="top" secondItem="DOj-a7-ZF0" secondAttribute="bottom" priority="999" constant="517" id="vsO-WF-FRD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnAXS" destination="DOj-a7-ZF0" id="rhx-8z-VHl"/>
+                        <outlet property="btnFlash" destination="OnK-Yp-rKa" id="rgQ-oF-nZf"/>
+                        <outlet property="btnHeart" destination="Ghm-K3-DE4" id="meq-2J-hk4"/>
+                        <outlet property="btnHelp" destination="Hec-sk-r2t" id="yUN-Zr-Lq8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lse-Jz-bPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-119" y="1079"/>
+        </scene>
+        <!--Like Or Dislike Class View Controller-->
+        <scene sceneID="1Fj-su-NLL">
+            <objects>
+                <viewController storyboardIdentifier="LikeOrDislikeViewController" id="7s7-Fa-BzO" customClass="LikeOrDislikeClassViewController" customModule="AXS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YQn-ab-q9h"/>
+                        <viewControllerLayoutGuide type="bottom" id="ijt-nx-dAF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pFG-v2-N2t">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PV1-Sb-EJd">
+                                <rect key="frame" x="143" y="536" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="7P1-oa-ErI"/>
+                                    <constraint firstAttribute="width" constant="45" id="dSM-6v-sGu"/>
+                                </constraints>
+                                <state key="normal" image="dislike"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tinderExamples" translatesAutoresizingMaskIntoConstraints="NO" id="PYl-DX-OQR">
+                                <rect key="frame" x="0.0" y="120" width="600" height="411"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="XDv-zD-5qa"/>
+                                    <constraint firstAttribute="height" constant="411" id="zbc-FM-rrx"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkM-BA-tfg">
+                                <rect key="frame" x="28" y="20" width="30" height="30"/>
+                                <state key="normal" image="back"/>
+                                <connections>
+                                    <action selector="btnBackTapped:" destination="7s7-Fa-BzO" eventType="touchUpInside" id="n05-65-gCK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4J-7B-yjT">
+                                <rect key="frame" x="196" y="531" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="Gxn-OG-7zB"/>
+                                    <constraint firstAttribute="height" constant="45" id="qKt-dv-f5V"/>
+                                </constraints>
+                                <state key="normal" image="like"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="b4J-7B-yjT" firstAttribute="leading" secondItem="PV1-Sb-EJd" secondAttribute="trailing" constant="8" id="16x-Mm-UqY"/>
+                            <constraint firstItem="VkM-BA-tfg" firstAttribute="leading" secondItem="pFG-v2-N2t" secondAttribute="leadingMargin" constant="8" id="AWI-YC-wdw"/>
+                            <constraint firstItem="b4J-7B-yjT" firstAttribute="leading" secondItem="PV1-Sb-EJd" secondAttribute="trailing" constant="8" id="Z46-r8-zhy"/>
+                            <constraint firstItem="PYl-DX-OQR" firstAttribute="leading" secondItem="pFG-v2-N2t" secondAttribute="leading" id="cNe-1g-ljo"/>
+                            <constraint firstItem="PYl-DX-OQR" firstAttribute="top" secondItem="YQn-ab-q9h" secondAttribute="bottom" constant="100" id="jQc-PG-V6p"/>
+                            <constraint firstItem="PV1-Sb-EJd" firstAttribute="top" secondItem="PYl-DX-OQR" secondAttribute="bottom" constant="5" id="kIe-0N-lhr"/>
+                            <constraint firstAttribute="trailing" secondItem="PYl-DX-OQR" secondAttribute="trailing" id="kmN-b1-3rJ"/>
+                            <constraint firstItem="PV1-Sb-EJd" firstAttribute="leading" secondItem="pFG-v2-N2t" secondAttribute="leadingMargin" constant="123" id="n4M-HV-T0x"/>
+                            <constraint firstItem="b4J-7B-yjT" firstAttribute="top" secondItem="PYl-DX-OQR" secondAttribute="bottom" id="nVS-fa-UVI"/>
+                            <constraint firstItem="VkM-BA-tfg" firstAttribute="top" secondItem="YQn-ab-q9h" secondAttribute="bottom" id="oFZ-lx-czJ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JY5-Sz-b79" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="515" y="1079"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="H71-5w-hBW">
@@ -390,14 +469,18 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="30" height="30"/>
+        <image name="dislike" width="18" height="17"/>
         <image name="flash" width="360" height="360"/>
         <image name="heart" width="360" height="360"/>
         <image name="help" width="360" height="360"/>
         <image name="hombre1" width="66" height="66"/>
+        <image name="like" width="18" height="16"/>
         <image name="mujer1" width="66" height="66"/>
         <image name="slide1" width="208" height="208"/>
         <image name="slide2" width="360" height="360"/>
         <image name="slide3" width="360" height="359"/>
         <image name="slide4" width="360" height="359"/>
+        <image name="tinderExamples" width="102" height="133"/>
     </resources>
 </document>

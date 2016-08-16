@@ -13,6 +13,12 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var qrCodeFrameView:UIView?
+    
+    @IBOutlet weak var btnFlash: UIButton!
+    @IBOutlet weak var btnHeart: UIButton!
+    @IBOutlet weak var btnHelp: UIButton!
+    @IBOutlet weak var btnAXS: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +60,17 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         view.layer.addSublayer(previewLayer);
         
         captureSession.startRunning();
+        
+        view.bringSubviewToFront(btnAXS)
+        view.bringSubviewToFront(btnHelp)
+        view.bringSubviewToFront(btnHeart)
+        view.bringSubviewToFront(btnFlash)
+        
+        qrCodeFrameView = UIView()
+        qrCodeFrameView?.layer.borderColor = UIColor.orangeColor().CGColor
+        qrCodeFrameView?.layer.borderWidth = 2
+        view.addSubview(qrCodeFrameView!)
+        view.bringSubviewToFront(qrCodeFrameView!)
     }
     
     func failed() {
@@ -84,6 +101,7 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         if let metadataObject = metadataObjects.first {
             let readableObject = metadataObject as! AVMetadataMachineReadableCodeObject;
+            qrCodeFrameView?.frame = readableObject.bounds
             
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             foundCode(readableObject.stringValue);
@@ -93,7 +111,12 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     func foundCode(code: String) {
-        print(code)
+            print(code)
+            
+            captureSession.stopRunning()
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -128,6 +151,13 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     @IBAction func btnHelpTapped(sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("PageViewController") //as! UIViewController
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func btnTapped(sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") //as! UIViewController
         self.presentViewController(vc, animated: true, completion: nil)
     }
 }
