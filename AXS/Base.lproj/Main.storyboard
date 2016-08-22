@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TrA-4W-pDi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TrA-4W-pDi">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -319,53 +321,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PV1-Sb-EJd">
-                                <rect key="frame" x="143" y="536" width="45" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="7P1-oa-ErI"/>
-                                    <constraint firstAttribute="width" constant="45" id="dSM-6v-sGu"/>
-                                </constraints>
-                                <state key="normal" image="dislike"/>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tinderExamples" translatesAutoresizingMaskIntoConstraints="NO" id="PYl-DX-OQR">
-                                <rect key="frame" x="0.0" y="120" width="600" height="411"/>
+                                <rect key="frame" x="123" y="50" width="354" height="368"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="600" id="XDv-zD-5qa"/>
-                                    <constraint firstAttribute="height" constant="411" id="zbc-FM-rrx"/>
+                                    <constraint firstAttribute="width" constant="354" id="JyU-QW-TYa"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkM-BA-tfg">
-                                <rect key="frame" x="28" y="20" width="30" height="30"/>
+                                <rect key="frame" x="15" y="15" width="30" height="30"/>
                                 <state key="normal" image="back"/>
                                 <connections>
                                     <action selector="btnBackTapped:" destination="7s7-Fa-BzO" eventType="touchUpInside" id="n05-65-gCK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4J-7B-yjT">
-                                <rect key="frame" x="196" y="531" width="45" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="Gxn-OG-7zB"/>
-                                    <constraint firstAttribute="height" constant="45" id="qKt-dv-f5V"/>
-                                </constraints>
-                                <state key="normal" image="like"/>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aau-C6-y3C">
+                                <rect key="frame" x="446" y="426" width="31" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0054351035481801221" green="0.79986092931937169" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dislike" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9M-Lu-9Qu">
+                                <rect key="frame" x="123" y="426" width="50" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="b4J-7B-yjT" firstAttribute="leading" secondItem="PV1-Sb-EJd" secondAttribute="trailing" constant="8" id="16x-Mm-UqY"/>
-                            <constraint firstItem="VkM-BA-tfg" firstAttribute="leading" secondItem="pFG-v2-N2t" secondAttribute="leadingMargin" constant="8" id="AWI-YC-wdw"/>
-                            <constraint firstItem="b4J-7B-yjT" firstAttribute="leading" secondItem="PV1-Sb-EJd" secondAttribute="trailing" constant="8" id="Z46-r8-zhy"/>
-                            <constraint firstItem="PYl-DX-OQR" firstAttribute="leading" secondItem="pFG-v2-N2t" secondAttribute="leading" id="cNe-1g-ljo"/>
-                            <constraint firstItem="PYl-DX-OQR" firstAttribute="top" secondItem="YQn-ab-q9h" secondAttribute="bottom" constant="100" id="jQc-PG-V6p"/>
-                            <constraint firstItem="PV1-Sb-EJd" firstAttribute="top" secondItem="PYl-DX-OQR" secondAttribute="bottom" constant="5" id="kIe-0N-lhr"/>
-                            <constraint firstAttribute="trailing" secondItem="PYl-DX-OQR" secondAttribute="trailing" id="kmN-b1-3rJ"/>
-                            <constraint firstItem="PV1-Sb-EJd" firstAttribute="leading" secondItem="pFG-v2-N2t" secondAttribute="leadingMargin" constant="123" id="n4M-HV-T0x"/>
-                            <constraint firstItem="b4J-7B-yjT" firstAttribute="top" secondItem="PYl-DX-OQR" secondAttribute="bottom" id="nVS-fa-UVI"/>
-                            <constraint firstItem="VkM-BA-tfg" firstAttribute="top" secondItem="YQn-ab-q9h" secondAttribute="bottom" id="oFZ-lx-czJ"/>
+                            <constraint firstItem="PYl-DX-OQR" firstAttribute="trailing" secondItem="aau-C6-y3C" secondAttribute="trailing" id="7zz-h7-uq3"/>
+                            <constraint firstItem="VkM-BA-tfg" firstAttribute="leading" secondItem="pFG-v2-N2t" secondAttribute="leadingMargin" constant="-5" id="A0a-zT-9YB"/>
+                            <constraint firstItem="H9M-Lu-9Qu" firstAttribute="baseline" secondItem="aau-C6-y3C" secondAttribute="baseline" id="DWT-9a-8f3"/>
+                            <constraint firstItem="VkM-BA-tfg" firstAttribute="top" secondItem="pFG-v2-N2t" secondAttribute="top" constant="15" id="FfF-mk-9kK"/>
+                            <constraint firstItem="aau-C6-y3C" firstAttribute="baseline" secondItem="H9M-Lu-9Qu" secondAttribute="firstBaseline" id="J6T-0f-4t6"/>
+                            <constraint firstItem="ijt-nx-dAF" firstAttribute="top" secondItem="H9M-Lu-9Qu" secondAttribute="bottom" constant="153" id="eAe-ov-4TQ"/>
+                            <constraint firstItem="PYl-DX-OQR" firstAttribute="centerX" secondItem="pFG-v2-N2t" secondAttribute="centerX" id="mDb-Jn-Rlj"/>
+                            <constraint firstItem="H9M-Lu-9Qu" firstAttribute="top" secondItem="PYl-DX-OQR" secondAttribute="bottom" constant="8" symbolic="YES" id="nAZ-yv-Mdn"/>
+                            <constraint firstItem="PYl-DX-OQR" firstAttribute="leading" secondItem="H9M-Lu-9Qu" secondAttribute="leading" id="o2J-oa-nkR"/>
+                            <constraint firstItem="PYl-DX-OQR" firstAttribute="top" secondItem="YQn-ab-q9h" secondAttribute="bottom" constant="30" id="o5b-3W-P9D"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="2Pn-pp-fAP" appends="YES" id="soz-B5-2Yt"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="imgView" destination="PYl-DX-OQR" id="mnI-Ew-law"/>
+                        <outlet property="lblDislike" destination="H9M-Lu-9Qu" id="Pht-fh-rdd"/>
+                        <outlet property="lblLike" destination="aau-C6-y3C" id="02c-ks-3Il"/>
+                        <outlet property="panGestureRecognizer" destination="2Pn-pp-fAP" id="QQB-Ax-EmP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JY5-Sz-b79" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="2Pn-pp-fAP">
+                    <connections>
+                        <action selector="swiped:" destination="7s7-Fa-BzO" id="yqG-ER-uRr"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="515" y="1079"/>
         </scene>
@@ -470,12 +482,10 @@
     </scenes>
     <resources>
         <image name="back" width="30" height="30"/>
-        <image name="dislike" width="18" height="17"/>
         <image name="flash" width="360" height="360"/>
         <image name="heart" width="360" height="360"/>
         <image name="help" width="360" height="360"/>
         <image name="hombre1" width="66" height="66"/>
-        <image name="like" width="18" height="16"/>
         <image name="mujer1" width="66" height="66"/>
         <image name="slide1" width="208" height="208"/>
         <image name="slide2" width="360" height="360"/>

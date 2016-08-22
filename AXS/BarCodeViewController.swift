@@ -48,7 +48,7 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             captureSession.addOutput(metadataOutput)
             
             metadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-            metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypePDF417Code]
+            metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
         } else {
             failed()
             return
@@ -107,7 +107,7 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             foundCode(readableObject.stringValue);
         }
         
-        dismissViewControllerAnimated(true, completion: nil)
+        //dismissViewControllerAnimated(true, completion: nil)
     }
     
     func foundCode(code: String) {
@@ -115,7 +115,14 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             
             captureSession.stopRunning()
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            dismissViewControllerAnimated(true, completion: nil)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") //as! UIViewController
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+            //dismissViewControllerAnimated(true, completion: nil)
+        
+        
         
     }
     
