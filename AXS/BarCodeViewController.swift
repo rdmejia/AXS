@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import Alamofire
 import UIKit
 
 
@@ -21,7 +22,7 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     @IBOutlet weak var btnHelp: UIButton!
     @IBOutlet weak var btnAXS: UIButton!
     
-    var json : AnyObject!
+    var json : NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,11 +123,7 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         {
             if(Operations.isConnectedToNetwork())
             {
-                let content = downloadAXS(code)
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") //as! UIViewController
-                self.presentViewController(vc, animated: true, completion: nil)
+                downloadAXS(code)
             }
             else
             {
@@ -169,6 +166,7 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     @IBAction func btnHelpTapped(sender: UIButton) {
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("PageViewController") //as! UIViewController
         self.presentViewController(vc, animated: true, completion: nil)
@@ -176,11 +174,18 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     
     @IBAction func btnTapped(sender: UIButton) {
-        downloadAXS("http://www.axs.gt/promociones/package0001.txt")
+        if(Operations.isConnectedToNetwork())
+        {
+            downloadAXS("http://www.axs.gt/promociones/package0001.txt")
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") //as! UIViewController
-        self.presentViewController(vc, animated: true, completion: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") //as! UIViewController
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+        else
+        {
+            makeToast("No estás conectado a Internet")
+        }
     }
     
     func makeToast(message: String)
@@ -201,35 +206,16 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             }, completion: nil)
     }
     
-    func downloadAXS(code: String) -> String
+    func downloadAXS(code: String)
     {
-        //let urlPath: String = "YOUR URL HERE"
-        let request = NSMutableURLRequest(URL: NSURL(string: code)!)
-        let session = NSURLSession.sharedSession()
-        
-        request.HTTPMethod = "GET"
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        let _: NSError?
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, err -> Void in
-            
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-            
-            print("Response: \(response)")
-            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("Body: \(strData)")
-            do {
-                self.json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? NSArray
-            } catch {
+        Alamofire.request(.GET, "http://www.axs.gt/promociones/package0001.txt").responseJSON{ (response) -> Void in // 1
+            if let JSON = response.result.value {
+                print("JSON: \(JSON)")
                 
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") //as! UIViewController
+                self.presentViewController(vc, animated: true, completion: nil)
             }
-            
-        })
-        
-        task.resume()
-        return ""
+        }
     }
 }

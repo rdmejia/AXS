@@ -21,7 +21,7 @@
 		9DF7620A1D5063130080F562 /* Swipe3ClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF762091D5063130080F562 /* Swipe3ClassViewController.swift */; };
 		9DF7620C1D5065220080F562 /* InformationClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF7620B1D5065220080F562 /* InformationClassViewController.swift */; };
 		9DF7620E1D5440090080F562 /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF7620D1D5440090080F562 /* BarCodeViewController.swift */; };
-		DC65BF456CC045B6822DAE1F /* Pods_AXS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B8FF552E4EE116B90FF999 /* Pods_AXS.framework */; };
+		DC65BF456CC045B6822DAE1F /* Pods_AXS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B8FF552E4EE116B90FF999 /* Pods_AXS.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
