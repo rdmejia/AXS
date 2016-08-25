@@ -79,6 +79,12 @@ class InformationClassViewController: UIViewController {
         }
         else
         {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            //defaults.setObject("BarCodeView", forKey: "LaunchView")
+            defaults.setBool(true, forKey: "NotFirstTime")
+            let age:Int? = Int(txtAge.text!)
+            defaults.setInteger((age)!, forKey: "Age")
+            defaults.setInteger(genre, forKey: "Genre")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewControllerWithIdentifier("BarCodeView") //as! UIViewController
             self.presentViewController(vc, animated: true, completion: nil)

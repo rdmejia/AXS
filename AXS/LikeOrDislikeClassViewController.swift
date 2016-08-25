@@ -55,47 +55,59 @@ class LikeOrDislikeClassViewController: UIViewController {
     @IBAction func swiped(sender: UIPanGestureRecognizer) {
         let origen = imgView.center
         
-        if(sender.state == UIGestureRecognizerState.Began)
+        switch sender.state
         {
+        case .Began:
             originalLocation = imgView.center
-        }
-        
-        let translation : CGPoint = sender.translationInView(imgView)
-        
-        let txy : CGAffineTransform = CGAffineTransformMakeTranslation(translation.x, -abs(translation.x) / 15)
-        let rot : CGAffineTransform = CGAffineTransformMakeRotation(-translation.x / 1500)
-        let t : CGAffineTransform = CGAffineTransformConcat(rot, txy)
-        imgView.transform = t
-        
-        if(translation.x > 100)
-        {
-            lblLike.hidden = false
-            lblDislike.hidden = true
-        }
-        else
-        {
-            if(translation.x < 100)
+            break
+        case .Changed:
+            let translation : CGPoint = sender.translationInView(imgView)
+            
+            let txy : CGAffineTransform = CGAffineTransformMakeTranslation(translation.x, -abs(translation.x) / 15)
+            let rot : CGAffineTransform = CGAffineTransformMakeRotation(-translation.x / 1500)
+            let t : CGAffineTransform = CGAffineTransformConcat(rot, txy)
+            imgView.transform = t
+            
+            if(translation.x > 100)
             {
-                lblDislike.hidden = false
-                lblLike.hidden = true
+                swipedRight()
             }
             else
             {
-                lblLike.hidden = true
-                lblDislike.hidden = true
+                if(translation.x < -100)
+                {
+                    swipedLeft()
+                }
+                else
+                {
+                    lblLike.hidden = true
+                    lblDislike.hidden = true
+                }
             }
-        }
-        
-        
-        if sender.state == UIGestureRecognizerState.Ended
-        {
+            break
+        case .Ended:
             sender.view!.transform = CGAffineTransformMakeTranslation(origen.x, origen.y)
             imgView.center = originalLocation!
             imgView.transform = CGAffineTransformMakeRotation(0)
             sender.view!.transform = CGAffineTransformMakeRotation(0)
             lblLike.hidden = true
             lblDislike.hidden = true
+            break
+        default:
+            break
         }
+    }
+    
+    func swipedLeft()
+    {
+        lblDislike.hidden = false
+        lblLike.hidden = true
+    }
+    
+    func swipedRight()
+    {
+        lblLike.hidden = false
+        lblDislike.hidden = true
     }
 
 }

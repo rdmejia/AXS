@@ -26,8 +26,18 @@ class Swipe3ClassViewController: UIViewController {
         
         //self.presentViewController(scndView, animated: true, completion: nil)
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("InformationViewController") //as! UIViewController
+        var vc : UIViewController
+        if(!defaults.boolForKey("NotFirstTime"))
+        {
+            vc = storyboard.instantiateViewControllerWithIdentifier("InformationViewController") //as! UIViewController
+        }
+        else
+        {
+            vc = storyboard.instantiateViewControllerWithIdentifier("BarCodeView")
+        }
         self.presentViewController(vc, animated: true, completion: nil)
     }
 
