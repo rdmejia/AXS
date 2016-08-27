@@ -13,7 +13,7 @@ class PromoItem: NSObject {
     var comercial: Int
     var title: String
     var desc: String
-    var cicleImage: String
+    var circleImage: String
     var status: String
     var saved: String
     var swipeCard: String
@@ -25,10 +25,27 @@ class PromoItem: NSObject {
         self.comercial = comercial
         self.title = title
         self.desc = desc
-        self.cicleImage = circleImage
+        self.circleImage = circleImage
         self.status = status
         self.saved = saved
         self.swipeCard = swipeCard
         self.imageUrl = imageUrl
+    }
+    
+    class func getPromoItem(dictionary: NSDictionary!) -> PromoItem
+    {
+        let promo: PromoItem = PromoItem(id: 0, comercial: 0, title: "", desc: "", circleImage: "", status: "", saved: "", swipeCard: "", imageUrl: "")
+        
+        promo.id = Int(dictionary["id"] as! String)!
+        promo.comercial = Int(dictionary["comercial"] as! String)!
+        promo.title = dictionary["title"] as! String
+        promo.desc = dictionary["desc"] as! String
+        promo.circleImage = dictionary["circleimage"] as! String
+        promo.status = dictionary["status"] as! String
+        promo.saved = dictionary["saved"] as! String
+        promo.swipeCard = dictionary["swipecard"] as! String
+        promo.imageUrl = dictionary["imageurl"] as! String
+
+        return promo
     }
 }

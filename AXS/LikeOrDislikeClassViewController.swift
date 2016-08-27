@@ -24,6 +24,8 @@ class LikeOrDislikeClassViewController: UIViewController {
     
     internal var json : NSDictionary!
     
+    var likedItems: [PromoItem] = []
+    
     var promociones: NSArray!
     var currentPromo: NSDictionary!
     var currentIndex = 0
@@ -64,8 +66,6 @@ class LikeOrDislikeClassViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
         
         print(self.json)
         promociones = self.json["promociones"] as! NSArray
@@ -139,14 +139,16 @@ class LikeOrDislikeClassViewController: UIViewController {
                 {
                     if(selection == 1)
                     {
+                        let promo: PromoItem = PromoItem.getPromoItem(currentPromo)
+                        likedItems.append(promo)
                         selection = 0
                     }
                     imgView.image = nil
                     locked = true
                     if(currentIndex == promociones.count)
                     {
+                        Operations.writeInternalFile(likedItems)
                         self.dismissViewControllerAnimated(true, completion: nil)
-                        
                     }
                     else
                     {

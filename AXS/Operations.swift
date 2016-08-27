@@ -28,46 +28,61 @@ class Operations: NSObject {
         return (isReachable && !needsConnection)
     }
     
-    class func writeInternalFile(data: Array<NSDictionary>)
+    class func writeInternalFile(data: [PromoItem])
     {
-        let documentsDirectoryPathString = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!
-        let documentsDirectoryPath = NSURL(string: documentsDirectoryPathString)!
-        
-        let jsonFilePath = documentsDirectoryPath.URLByAppendingPathComponent("test.json")
+        let filename = getDocumentsDirectory().stringByAppendingString("/output.json")
         let fileManager = NSFileManager.defaultManager()
-        var isDirectory: ObjCBool = false
         
-        // creating a .json file in the Documents folder
-        if !fileManager.fileExistsAtPath(jsonFilePath.absoluteString, isDirectory: &isDirectory) {
-            let created = fileManager.createFileAtPath(jsonFilePath.absoluteString, contents: nil, attributes: nil)
-            if created {
-                print("File created ")
-            } else {
-                print("Couldn't create file for some reason")
+        var text = ""
+        
+        if fileManager.fileExistsAtPath(filename) {
+            print("FILE AVAILABLE")
+            
+            do
+            {
+                text = try String(contentsOfFile: filename, encoding: NSUTF8StringEncoding)
+                text = text.substringToIndex(text.endIndex.predecessor().predecessor())
+                text += ","
             }
+            catch(let e){}
+            
         } else {
-            print("File already exists")
+            print("FILE NOT AVAILABLE")
+            
+            text = "{\"promociones\":["
+            
         }
         
-        // creating JSON out of the above array
-        var jsonData: NSData!
-        do {
-            jsonData = try NSJSONSerialization.dataWithJSONObject(data, options: NSJSONWritingOptions())
-            let jsonString = String(data: jsonData, encoding: NSUTF8StringEncoding)
-            print(jsonString)
-        } catch let error as NSError {
-            print("Array to JSON conversion failed: \(error.localizedDescription)")
+        for promo in data {
+            text = text + "{\"id\": \"" + String(promo.id)
+            text += "\",\"comercial\": \""
+            text += String(promo.comercial)
+            text += "\",\"title\": \""
+            text += promo.title
+            text += "\", \"desc\": \"" + promo.desc
+            text += "\", \"circleimage\": \""
+            text += promo.circleImage + "\",\"status\": \""
+            text += promo.status + "\",\"saved\": \"" + promo.saved
+            text += "\",\"swipecard\": \"" + promo.swipeCard + "\",\"imageurl\": \"" + promo.imageUrl + "\""
+            
+            text += "},"
         }
         
-        // Write that JSON to the file created earlier
-        let jsonFilePath2 = documentsDirectoryPath.URLByAppendingPathComponent("test.json")
-        do {
-            let file = try NSFileHandle(forWritingToURL: jsonFilePath2)
-            file.writeData(jsonData)
-            print("JSON data was written to teh file successfully!")
-        } catch let error as NSError {
-            print("Couldn't write to file: \(error.localizedDescription)")
+        text = text.substringToIndex(text.endIndex.predecessor())
+        
+        text += "]}"
+        
+        do
+        {
+            try text.writeToFile(filename, atomically: true, encoding: NSUTF8StringEncoding)
         }
-
+        catch(let e) {}
+    }
+    
+    class func getDocumentsDirectory() -> NSString
+    {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
 }
