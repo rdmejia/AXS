@@ -233,7 +233,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="top" semanticContentAttribute="playback" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOj-a7-ZF0">
+                            <button opaque="NO" contentMode="top" semanticContentAttribute="playback" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOj-a7-ZF0">
                                 <rect key="frame" x="269" y="20" width="63" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="Ooe-KN-yG2"/>
@@ -298,16 +298,18 @@
                             <constraint firstItem="6PS-6L-yqR" firstAttribute="top" secondItem="DOj-a7-ZF0" secondAttribute="bottom" priority="999" constant="517" id="vsO-WF-FRD"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Hxj-YL-xUs"/>
                     <connections>
                         <outlet property="btnAXS" destination="DOj-a7-ZF0" id="rhx-8z-VHl"/>
                         <outlet property="btnFlash" destination="OnK-Yp-rKa" id="rgQ-oF-nZf"/>
                         <outlet property="btnHeart" destination="Ghm-K3-DE4" id="meq-2J-hk4"/>
                         <outlet property="btnHelp" destination="Hec-sk-r2t" id="yUN-Zr-Lq8"/>
+                        <segue destination="7s7-Fa-BzO" kind="show" identifier="segueJson" id="3du-br-ubA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lse-Jz-bPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-119" y="1079"/>
+            <point key="canvasLocation" x="1510" y="1077"/>
         </scene>
         <!--Like Or Dislike Class View Controller-->
         <scene sceneID="1Fj-su-NLL">
@@ -321,51 +323,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tinderExamples" translatesAutoresizingMaskIntoConstraints="NO" id="PYl-DX-OQR">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYl-DX-OQR">
                                 <rect key="frame" x="123" y="50" width="354" height="368"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="354" id="JyU-QW-TYa"/>
+                                    <constraint firstAttribute="width" constant="354" id="1AD-mf-0zu"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkM-BA-tfg">
-                                <rect key="frame" x="15" y="15" width="30" height="30"/>
+                                <rect key="frame" x="20" y="20" width="30" height="30"/>
                                 <state key="normal" image="back"/>
                                 <connections>
                                     <action selector="btnBackTapped:" destination="7s7-Fa-BzO" eventType="touchUpInside" id="n05-65-gCK"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Like" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aau-C6-y3C">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Like" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aau-C6-y3C">
                                 <rect key="frame" x="446" y="426" width="31" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0054351035481801221" green="0.79986092931937169" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dislike" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9M-Lu-9Qu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Dislike" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9M-Lu-9Qu">
                                 <rect key="frame" x="123" y="426" width="50" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nope" translatesAutoresizingMaskIntoConstraints="NO" id="iN9-vR-wJ1">
+                                <rect key="frame" x="80" y="95" width="240" height="228"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="228" id="eEV-Ag-KSN"/>
+                                    <constraint firstAttribute="width" constant="240" id="iDH-y9-0Zh"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like-1" translatesAutoresizingMaskIntoConstraints="NO" id="uWf-GF-uX1">
+                                <rect key="frame" x="280" y="95" width="240" height="198"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="198" id="4NT-65-7aI"/>
+                                    <constraint firstAttribute="width" constant="240" id="skK-9X-wc8"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="PYl-DX-OQR" firstAttribute="trailing" secondItem="aau-C6-y3C" secondAttribute="trailing" id="7zz-h7-uq3"/>
-                            <constraint firstItem="VkM-BA-tfg" firstAttribute="leading" secondItem="pFG-v2-N2t" secondAttribute="leadingMargin" constant="-5" id="A0a-zT-9YB"/>
-                            <constraint firstItem="H9M-Lu-9Qu" firstAttribute="baseline" secondItem="aau-C6-y3C" secondAttribute="baseline" id="DWT-9a-8f3"/>
-                            <constraint firstItem="VkM-BA-tfg" firstAttribute="top" secondItem="pFG-v2-N2t" secondAttribute="top" constant="15" id="FfF-mk-9kK"/>
-                            <constraint firstItem="aau-C6-y3C" firstAttribute="baseline" secondItem="H9M-Lu-9Qu" secondAttribute="firstBaseline" id="J6T-0f-4t6"/>
-                            <constraint firstItem="ijt-nx-dAF" firstAttribute="top" secondItem="H9M-Lu-9Qu" secondAttribute="bottom" constant="153" id="eAe-ov-4TQ"/>
-                            <constraint firstItem="PYl-DX-OQR" firstAttribute="centerX" secondItem="pFG-v2-N2t" secondAttribute="centerX" id="mDb-Jn-Rlj"/>
-                            <constraint firstItem="H9M-Lu-9Qu" firstAttribute="top" secondItem="PYl-DX-OQR" secondAttribute="bottom" constant="8" symbolic="YES" id="nAZ-yv-Mdn"/>
-                            <constraint firstItem="PYl-DX-OQR" firstAttribute="leading" secondItem="H9M-Lu-9Qu" secondAttribute="leading" id="o2J-oa-nkR"/>
-                            <constraint firstItem="PYl-DX-OQR" firstAttribute="top" secondItem="YQn-ab-q9h" secondAttribute="bottom" constant="30" id="o5b-3W-P9D"/>
+                            <constraint firstItem="H9M-Lu-9Qu" firstAttribute="top" secondItem="PYl-DX-OQR" secondAttribute="bottom" constant="8" symbolic="YES" id="CIo-kU-9lF"/>
+                            <constraint firstItem="uWf-GF-uX1" firstAttribute="top" secondItem="YQn-ab-q9h" secondAttribute="bottom" constant="75" id="K2v-7m-v2K"/>
+                            <constraint firstItem="aau-C6-y3C" firstAttribute="baseline" secondItem="H9M-Lu-9Qu" secondAttribute="firstBaseline" id="Lqc-ih-qKi"/>
+                            <constraint firstItem="VkM-BA-tfg" firstAttribute="leading" secondItem="pFG-v2-N2t" secondAttribute="leadingMargin" id="McR-kS-MFy"/>
+                            <constraint firstItem="uWf-GF-uX1" firstAttribute="centerX" secondItem="PYl-DX-OQR" secondAttribute="centerX" constant="100" id="Ox7-gD-tEx"/>
+                            <constraint firstItem="H9M-Lu-9Qu" firstAttribute="baseline" secondItem="aau-C6-y3C" secondAttribute="baseline" id="TrI-0a-tmh"/>
+                            <constraint firstItem="PYl-DX-OQR" firstAttribute="trailing" secondItem="aau-C6-y3C" secondAttribute="trailing" id="Ubz-M8-JPp"/>
+                            <constraint firstItem="PYl-DX-OQR" firstAttribute="centerX" secondItem="pFG-v2-N2t" secondAttribute="centerX" id="oGM-Yq-lRd"/>
+                            <constraint firstItem="PYl-DX-OQR" firstAttribute="top" secondItem="YQn-ab-q9h" secondAttribute="bottom" constant="30" id="pbg-9F-ag9"/>
+                            <constraint firstItem="VkM-BA-tfg" firstAttribute="top" secondItem="YQn-ab-q9h" secondAttribute="bottom" id="siD-eU-Wfj"/>
+                            <constraint firstItem="iN9-vR-wJ1" firstAttribute="centerX" secondItem="PYl-DX-OQR" secondAttribute="centerX" constant="-100" id="u54-tL-wga"/>
+                            <constraint firstItem="H9M-Lu-9Qu" firstAttribute="leading" secondItem="PYl-DX-OQR" secondAttribute="leading" id="ucc-7f-J86"/>
+                            <constraint firstItem="ijt-nx-dAF" firstAttribute="top" secondItem="H9M-Lu-9Qu" secondAttribute="bottom" constant="153" id="uhs-LY-bbz"/>
+                            <constraint firstItem="iN9-vR-wJ1" firstAttribute="top" secondItem="uWf-GF-uX1" secondAttribute="top" id="vla-Ex-90e"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="2Pn-pp-fAP" appends="YES" id="soz-B5-2Yt"/>
                         </connections>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="imgLike" destination="uWf-GF-uX1" id="F1R-QY-vC4"/>
+                        <outlet property="imgNope" destination="iN9-vR-wJ1" id="nhV-A5-AXe"/>
                         <outlet property="imgView" destination="PYl-DX-OQR" id="mnI-Ew-law"/>
                         <outlet property="lblDislike" destination="H9M-Lu-9Qu" id="Pht-fh-rdd"/>
                         <outlet property="lblLike" destination="aau-C6-y3C" id="02c-ks-3Il"/>
@@ -379,7 +403,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="515" y="1079"/>
+            <point key="canvasLocation" x="2286" y="1082"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="H71-5w-hBW">
@@ -486,11 +510,12 @@
         <image name="heart" width="360" height="360"/>
         <image name="help" width="360" height="360"/>
         <image name="hombre1" width="66" height="66"/>
+        <image name="like-1" width="66" height="60"/>
         <image name="mujer1" width="66" height="66"/>
+        <image name="nope" width="73" height="66"/>
         <image name="slide1" width="208" height="208"/>
         <image name="slide2" width="360" height="360"/>
         <image name="slide3" width="360" height="359"/>
         <image name="slide4" width="360" height="359"/>
-        <image name="tinderExamples" width="102" height="133"/>
     </resources>
 </document>

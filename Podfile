@@ -6,7 +6,7 @@ target 'AXS' do
   use_frameworks!
   
   pod 'Alamofire', '~> 3.4'
-
+  pod 'AlamofireImage', '~> 2.0'
   # Pods for AXS
 
   target 'AXSTests' do

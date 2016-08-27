@@ -22,7 +22,7 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     @IBOutlet weak var btnHelp: UIButton!
     @IBOutlet weak var btnAXS: UIButton!
     
-    var json : NSMutableArray!
+    var json : NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +97,15 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         if (captureSession?.running == true) {
             captureSession.stopRunning();
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "segueJson") {
+            let svc = segue.destinationViewController as! LikeOrDislikeClassViewController
+            
+            svc.json = self.json
+            
         }
     }
     
@@ -179,8 +188,11 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             downloadAXS("http://www.axs.gt/promociones/package0001.txt")
         
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") //as! UIViewController
-            self.presentViewController(vc, animated: true, completion: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") as! LikeOrDislikeClassViewController
+            //vc.json = self.json
+            self.navigationController?.pushViewController(vc, animated: true)
+            //self.presentViewController(vc, animated: true, completion: nil)
+            //self.shouldPerformSegueWithIdentifier("LikeOrDislikeViewController", sender: self)
         }
         else
         {
@@ -208,14 +220,15 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     func downloadAXS(code: String)
     {
-        Alamofire.request(.GET, "http://www.axs.gt/promociones/package0001.txt").responseJSON{ (response) -> Void in // 1
+        Alamofire.request(.GET, code).responseJSON{ (response) -> Void in // 1
             if let JSON = response.result.value {
-                print("JSON: \(JSON)")
-                
+                Operations.json = JSON as! NSDictionary
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") //as! UIViewController
+                let vc = storyboard.instantiateViewControllerWithIdentifier("LikeOrDislikeViewController") as! LikeOrDislikeClassViewController
+                vc.json = JSON as! NSDictionary
                 self.presentViewController(vc, animated: true, completion: nil)
             }
         }
+
     }
 }

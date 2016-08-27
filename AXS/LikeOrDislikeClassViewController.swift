@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class LikeOrDislikeClassViewController: UIViewController {
 
@@ -15,17 +17,44 @@ class LikeOrDislikeClassViewController: UIViewController {
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var lblLike: UILabel!
     @IBOutlet weak var lblDislike: UILabel!
+    @IBOutlet weak var imgLike: UIImageView!
+    @IBOutlet weak var imgNope: UIImageView!
     
     var originalLocation : CGPoint?
+    
+    internal var json : NSDictionary!
+    
+    var promociones: NSArray!
+    var currentPromo: NSDictionary!
+    var currentIndex = 0
+    
+    var didChoose = false
+    var locked = true
+    var selection = 0 //0: nothing, 1: right, 2: left
+    
+    let photoCache = AutoPurgingImageCache(
+        memoryCapacity: 100 * 1024 * 1024,
+        preferredMemoryUsageAfterPurge: 60 * 1024 * 1024
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
+        imgView.layer.cornerRadius = 8
+        imgView.layer.shadowOffset = CGSizeMake(7, 7)
+        imgView.layer.shadowRadius = 5
+        imgView.layer.shadowOpacity = 0.5
+        
         lblLike.hidden = true
         lblDislike.hidden = true
-
+        
+        imgLike.hidden = true
+        imgNope.hidden = true
+        
+        //promociones = json["promociones"] as! NSArray
+        //updateImage()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,12 +62,18 @@ class LikeOrDislikeClassViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+        print(self.json)
+        promociones = self.json["promociones"] as! NSArray
+        updateImage()
+    }
+    
     @IBAction func btnBackTapped(sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("BarCodeView") //as! UIViewController
-        self.presentViewController(vc, animated: true, completion: nil)
-        //navigationController?.popViewControllerAnimated(true)
-        //navigationController?.popToRootViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*
@@ -51,63 +86,110 @@ class LikeOrDislikeClassViewController: UIViewController {
     }
     */
     
-    
     @IBAction func swiped(sender: UIPanGestureRecognizer) {
         let origen = imgView.center
-        
-        switch sender.state
+        if(!locked)
         {
-        case .Began:
-            originalLocation = imgView.center
-            break
-        case .Changed:
-            let translation : CGPoint = sender.translationInView(imgView)
-            
-            let txy : CGAffineTransform = CGAffineTransformMakeTranslation(translation.x, -abs(translation.x) / 15)
-            let rot : CGAffineTransform = CGAffineTransformMakeRotation(-translation.x / 1500)
-            let t : CGAffineTransform = CGAffineTransformConcat(rot, txy)
-            imgView.transform = t
-            
-            if(translation.x > 100)
+            switch sender.state
             {
-                swipedRight()
-            }
-            else
-            {
-                if(translation.x < -100)
+            case .Began:
+                originalLocation = imgView.center
+                break
+            case .Changed:
+                let translation : CGPoint = sender.translationInView(imgView)
+                
+                let txy : CGAffineTransform = CGAffineTransformMakeTranslation(translation.x, -abs(translation.x) / 15)
+                let rot : CGAffineTransform = CGAffineTransformMakeRotation(-translation.x / 1500)
+                let t : CGAffineTransform = CGAffineTransformConcat(rot, txy)
+                imgView.transform = t
+                
+                if(translation.x > 100)
                 {
-                    swipedLeft()
+                    swipedRight()
+                    didChoose = true
                 }
                 else
                 {
-                    lblLike.hidden = true
-                    lblDislike.hidden = true
+                    if(translation.x < -100)
+                    {
+                        swipedLeft()
+                        didChoose = true
+                    }
+                    else
+                    {
+                        selection = 0
+                        imgLike.hidden = true
+                        imgNope.hidden = true
+                        lblLike.hidden = true
+                        lblDislike.hidden = true
+                        didChoose = false
+                    }
                 }
+                break
+            case .Ended:
+                sender.view!.transform = CGAffineTransformMakeTranslation(origen.x, origen.y)
+                imgView.center = originalLocation!
+                imgView.transform = CGAffineTransformMakeRotation(0)
+                sender.view!.transform = CGAffineTransformMakeRotation(0)
+                lblLike.hidden = true
+                imgLike.hidden = true
+                imgNope.hidden = true
+                lblDislike.hidden = true
+                if(didChoose)
+                {
+                    if(selection == 1)
+                    {
+                        selection = 0
+                    }
+                    imgView.image = nil
+                    locked = true
+                    if(currentIndex == promociones.count)
+                    {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        
+                    }
+                    else
+                    {
+                        updateImage()
+                    }
+                    
+                }
+                break
+            default:
+                break
             }
-            break
-        case .Ended:
-            sender.view!.transform = CGAffineTransformMakeTranslation(origen.x, origen.y)
-            imgView.center = originalLocation!
-            imgView.transform = CGAffineTransformMakeRotation(0)
-            sender.view!.transform = CGAffineTransformMakeRotation(0)
-            lblLike.hidden = true
-            lblDislike.hidden = true
-            break
-        default:
-            break
+        }
+    }
+    
+    func updateImage()
+    {
+        currentPromo = promociones[currentIndex] as! NSDictionary
+        currentIndex = currentIndex + 1
+        let urlImage: String = currentPromo["swipecard"] as! String
+        Alamofire.request(.GET, urlImage).responseImage { (response) -> Void in
+            if let image = response.result.value {
+                self.imgView.image = image
+                self.locked = false
+            }
         }
     }
     
     func swipedLeft()
     {
         lblDislike.hidden = false
+        imgNope.hidden = false
         lblLike.hidden = true
+        imgLike.hidden = true
+        selection = 2
     }
     
     func swipedRight()
     {
         lblLike.hidden = false
+        imgLike.hidden = false
         lblDislike.hidden = true
+        imgNope.hidden = true
+        selection = 1
     }
 
 }
