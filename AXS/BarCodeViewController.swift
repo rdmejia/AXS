@@ -23,9 +23,18 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     @IBOutlet weak var btnAXS: UIButton!
     
     var json : NSDictionary!
+    var items: [PromoItem] = []
+    var promociones: NSArray!
+    var comerciales: NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Alamofire.request(.GET, "http://www.axs.gt/promociones/comerciales.txt").responseJSON{ (response) -> Void in // 1
+            if let JSON = response.result.value {
+                self.comerciales = JSON["content"] as! NSMutableArray
+            }
+        }
         
         view.backgroundColor = UIColor.blackColor()
         captureSession = AVCaptureSession()
@@ -90,6 +99,10 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if (captureSession?.running == false) {
             captureSession.startRunning();
         }
+        
+        self.navigationController?.navigationBar.hidden = true
+        
+        //self.navigationController?.navigationBarHidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -98,6 +111,8 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if (captureSession?.running == true) {
             captureSession.stopRunning();
         }
+        
+        self.navigationController?.navigationBar.hidden = false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -107,6 +122,39 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             svc.json = self.json
             
         }
+        else if segue.identifier == "passMalls"
+        {
+            var aux: NSMutableArray = NSMutableArray()
+            
+            for comercial in comerciales {
+                if(hasSale(comercial as! NSDictionary))
+                {
+                    aux.addObject(comercial)
+                }
+            }
+            
+            let nav = segue.destinationViewController as! UINavigationController
+            let vc = nav.topViewController as! ComercialesViewController
+            
+            //let vc = segue.destinationViewController as! ComercialesViewController
+            
+            vc.items = self.items
+            vc.promociones = self.promociones
+            vc.comerciales = aux
+        }
+    }
+    
+    func hasSale(comercial: NSDictionary) -> Bool
+    {
+        let id = Int(comercial["id"] as! String)
+        for item in items {
+            if(id == item.comercial)
+            {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
@@ -197,6 +245,36 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         else
         {
             makeToast("No estás conectado a Internet")
+        }
+    }
+    
+    @IBAction func btnHeartTapped(sender: UIButton) {
+        /*let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ComercialesView") //as! MyCollectionViewController
+        self.presentViewController(vc, animated: true, completion: nil)*/
+        
+        let filename = Operations.getDocumentsDirectory().stringByAppendingString("/output.json")
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(filename)
+        {
+            do
+            {
+                let jsonData = try NSData(contentsOfFile: filename, options: .DataReadingMappedIfSafe)
+                do
+                {
+                    let jsonResult: NSDictionary = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                    promociones = jsonResult["promociones"] as! NSArray
+                    for item in promociones {
+                        let d = item as! NSDictionary
+                        let p = PromoItem.getPromoItem(d)
+                        items.append(p)
+                    }
+                    
+                    self.performSegueWithIdentifier("passMalls", sender: self)
+                }
+                catch(let e){}
+            }
+            catch(let e) {}
         }
     }
     
