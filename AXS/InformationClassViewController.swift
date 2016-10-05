@@ -82,6 +82,7 @@ class InformationClassViewController: UIViewController {
             let defaults = NSUserDefaults.standardUserDefaults()
             //defaults.setObject("BarCodeView", forKey: "LaunchView")
             defaults.setBool(true, forKey: "NotFirstTime")
+            defaults.setBool(false, forKey: "SkippedInformation")
             let age:Int? = Int(txtAge.text!)
             defaults.setInteger((age)!, forKey: "Age")
             defaults.setInteger(genre, forKey: "Genre")
@@ -89,6 +90,25 @@ class InformationClassViewController: UIViewController {
             let vc = storyboard.instantiateViewControllerWithIdentifier("BarCodeView") //as! UIViewController
             self.presentViewController(vc, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func btnSkipTapped(sender: UIButton) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        //defaults.setObject("BarCodeView", forKey: "LaunchView")
+        defaults.setBool(true, forKey: "NotFirstTime")
+        let alert = UIAlertController(title: "¿Estás seguro?", message: "Es importante que ingreses los datos solicitados", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
+            let defaults = NSUserDefaults.standardUserDefaults()
+            //defaults.setObject("BarCodeView", forKey: "LaunchView")
+            defaults.setBool(true, forKey: "SkippedInformation")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("BarCodeView") //as! UIViewController
+            self.presentViewController(vc, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     /*

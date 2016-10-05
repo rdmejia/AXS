@@ -19,15 +19,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = NSUserDefaults.standardUserDefaults()
         if defaults.boolForKey("NotFirstTime")
         {
-            //if launchView == "BarCodeView"
-            //{
+            if !defaults.boolForKey("SkippedInformation")
+            {
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil) // this assumes your storyboard is titled "Main.storyboard"
                 let yourVC = mainStoryboard.instantiateViewControllerWithIdentifier("BarCodeView") as! BarCodeViewController // inside "YOUR_VC_IDENTIFIER" substitute the Storyboard ID you created in step 2 for the view controller you want to open here. And substitute YourViewController with the name of your view controller, like, for example, ViewController2.
                 appDelegate.window?.rootViewController = yourVC
                 appDelegate.window?.makeKeyAndVisible()
-            //}
+            }
+            else
+            {
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil) // this assumes your storyboard is titled "Main.storyboard"
+                let yourVC = mainStoryboard.instantiateViewControllerWithIdentifier("InformationViewController") as! InformationClassViewController // inside "YOUR_VC_IDENTIFIER" substitute the Storyboard ID you created in step 2 for the view controller you want to open here. And substitute YourViewController with the name of your view controller, like, for example, ViewController2.
+                appDelegate.window?.rootViewController = yourVC
+                appDelegate.window?.makeKeyAndVisible()
+            }
         }
         return true
     }
