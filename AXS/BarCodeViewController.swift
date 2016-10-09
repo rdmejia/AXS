@@ -124,7 +124,7 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
         else if segue.identifier == "passMalls"
         {
-            var aux: NSMutableArray = NSMutableArray()
+            let aux: NSMutableArray = NSMutableArray()
             
             for comercial in comerciales {
                 if(hasSale(comercial as! NSDictionary))
@@ -264,6 +264,7 @@ class BarCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 {
                     let jsonResult: NSDictionary = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                     promociones = jsonResult["promociones"] as! NSArray
+                    items.removeAll()
                     for item in promociones {
                         let d = item as! NSDictionary
                         let p = PromoItem.getPromoItem(d)

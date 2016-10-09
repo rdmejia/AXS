@@ -69,6 +69,23 @@ class LikeOrDislikeClassViewController: UIViewController {
         
         print(self.json)
         promociones = self.json["promociones"] as! NSArray
+        var i = 0
+        for promo in promociones
+        {
+            let urlImage: String = promo["swipecard"] as! String
+            Alamofire.request(.GET, urlImage).responseImage { (response) -> Void in
+                if let image = response.result.value {
+                    self.photoCache.addImage(image, withIdentifier: "img" + String(i))
+                    if(i == 0)
+                    {
+                        self.currentIndex = 0
+                        self.updateImage()
+                    }
+                    self.locked = false
+                    i = i + 1
+                }
+            }
+        }
         updateImage()
     }
     
@@ -139,19 +156,21 @@ class LikeOrDislikeClassViewController: UIViewController {
                 {
                     if(selection == 1)
                     {
-                        let promo: PromoItem = PromoItem.getPromoItem(currentPromo)
+                        
+                        let promo: PromoItem = PromoItem.getPromoItem(promociones[currentIndex] as! NSDictionary)
                         likedItems.append(promo)
                         selection = 0
                     }
                     imgView.image = nil
                     locked = true
-                    if(currentIndex == promociones.count)
+                    if(currentIndex == promociones.count - 1)
                     {
                         Operations.writeInternalFile(likedItems)
                         self.dismissViewControllerAnimated(true, completion: nil)
                     }
                     else
                     {
+                        currentIndex = currentIndex + 1
                         updateImage()
                     }
                     
@@ -165,7 +184,7 @@ class LikeOrDislikeClassViewController: UIViewController {
     
     func updateImage()
     {
-        currentPromo = promociones[currentIndex] as! NSDictionary
+        /*currentPromo = promociones[currentIndex] as! NSDictionary
         currentIndex = currentIndex + 1
         let urlImage: String = currentPromo["swipecard"] as! String
         Alamofire.request(.GET, urlImage).responseImage { (response) -> Void in
@@ -173,7 +192,10 @@ class LikeOrDislikeClassViewController: UIViewController {
                 self.imgView.image = image
                 self.locked = false
             }
-        }
+        }*/
+        self.imgView.image = photoCache.imageWithIdentifier("img" + String(currentIndex))
+        //currentIndex = currentIndex + 1
+        locked = false
     }
     
     func swipedLeft()

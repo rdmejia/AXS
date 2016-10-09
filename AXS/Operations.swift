@@ -58,16 +58,16 @@ class Operations: NSObject {
         }
         
         for promo in data {
-            text = text + "{\"id\": \"" + String(promo.id)
-            text += "\",\"comercial\": \""
+            text = text + "{\"id\":\"" + String(promo.id)
+            text += "\",\"comercial\":\""
             text += String(promo.comercial)
-            text += "\",\"title\": \""
+            text += "\",\"title\":\""
             text += promo.title
-            text += "\", \"desc\": \"" + promo.desc
-            text += "\", \"circleimage\": \""
-            text += promo.circleImage + "\",\"status\": \""
-            text += promo.status + "\",\"saved\": \"" + promo.saved
-            text += "\",\"swipecard\": \"" + promo.swipeCard + "\",\"imageurl\": \"" + promo.imageUrl + "\""
+            text += "\",\"desc\":\"" + promo.desc
+            text += "\",\"circleimage\":\""
+            text += promo.circleImage + "\",\"status\":\""
+            text += promo.status + "\",\"saved\":\"" + promo.saved
+            text += "\",\"swipecard\":\"" + promo.swipeCard + "\",\"imageurl\":\"" + promo.imageUrl + "\""
             
             text += "},"
         }

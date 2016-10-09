@@ -283,7 +283,7 @@
                                     <action selector="btnFlashTapped:" destination="nRp-rD-KkR" eventType="touchUpInside" id="MY0-tQ-E9p"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heG-8O-Dq7">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="heG-8O-Dq7">
                                 <rect key="frame" x="277" y="266" width="46" height="30"/>
                                 <state key="normal" title="button">
                                     <color key="titleShadowColor" red="0.30675092500000001" green="1" blue="0.35096619029999998" alpha="1" colorSpace="calibratedRGB"/>
